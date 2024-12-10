@@ -31,11 +31,23 @@ Interact with the model in your browser. The model will generate questions about
 If you want to integrate the model into your own application to generate questions programmatically:
 
 ```python
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoModel, AutoTokenizer, AutoModelForCausalLM
+from unsloth import FastLanguageModel
+import torch
 
-# Load the base tokenizer and LoRA model
-tokenizer = AutoTokenizer.from_pretrained("unsloth/llama-3.2-3b-instruct-bnb-4bit", use_fast=False)
-model = AutoModelForCausalLM.from_pretrained("Grandediw/lora_model")
+max_seq_length = 2048  # Choose any! We auto support ROPE scaling internally!
+dtype = None  # None for auto detection. Float16 for Tesla T4, V100, bFloat16 for Ampere+
+
+model_name_or_path = "jacopoda/lora_model"
+
+model, tokenizer = FastLanguageModel.from_pretrained(
+    model_name=model_name_or_path,
+    max_seq_length=max_seq_length,
+    dtype=dtype,
+    load_in_4bit=True,
+    # token = "hf_...", #se il nostro modello non è public
+    # Use one if using gated models like meta-llama/Llama-2-7b-hf
+)
 
 # Example prompt
 prompt = "Generate a question about historical architecture for the user to answer."
