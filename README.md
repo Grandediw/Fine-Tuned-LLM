@@ -2,7 +2,7 @@
 
 Welcome to the repository for my fine-tuned language model using LoRA (Low-Rank Adaptation)! This project showcases how we can leverage parameter-efficient fine-tuning with LoRA to adapt a powerful base language model for specific use cases.
 
-The fine-tuned model is deployed on Hugging Face Spaces, where you can interact with it directly. Try it out here: [**Launch the Model**](https://huggingface.co/spaces/Grandediw/Test).
+The fine-tuned model is deployed on Hugging Face Spaces, where you can interact with it directly. Try it out here: [**Launch the Model**](https://9b7c23980211fb75b3.gradio.live/).
 
 ---
 
@@ -19,7 +19,7 @@ This project fine-tunes the `unsloth/llama-3.2-3b-instruct-bnb-4bit` base model 
 ## **How to Use**
 ### **Try It Online**
 You can interact with the model directly in your browser via the Hugging Face Space:
-👉 **[Try the Model Here](https://huggingface.co/spaces/Grandediw/Test)**
+👉 **[Try the Model Here](https://9b7c23980211fb75b3.gradio.live/)**
 
 ### **Use the Model in Your Code**
 You can integrate the model into your Python applications using the Hugging Face Transformers library.
