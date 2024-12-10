@@ -31,6 +31,10 @@ Interact with the model in your browser. The model will generate questions about
 If you want to integrate the model into your own application to generate questions programmatically:
 
 ```python
+!pip install unsloth
+!pip install transformers
+!pip install torch
+
 from transformers import AutoModel, AutoTokenizer, AutoModelForCausalLM
 from unsloth import FastLanguageModel
 import torch
