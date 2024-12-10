@@ -3,7 +3,7 @@
 Welcome to the repository for our fine-tuned language model using LoRA (Low-Rank Adaptation)! This project demonstrates how we can leverage parameter-efficient fine-tuning to adapt a powerful base language model for generating domain-specific questions. Instead of having the model answer the questions, this setup allows the user to respond with their own answers. 
 
 **Key Links:**
-- **Interactive Demo (Gradio)**: [Try the Model Here](https://9b7c23980211fb75b3.gradio.live/)
+- **Interactive Demo (Google Colab):** [Run the Inference Notebook](https://colab.research.google.com/github/Grandediw/Fine-Tuned-LLM/blob/main/Gradio_inference.ipynb)
 
 ---
 
