@@ -1,0 +1,56 @@
+name: Build and Deploy Gradio Interface
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          # Ensuring we fetch all branches if needed
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install jupyter nbconvert gradio transformers torch peft unsloth
+
+      - name: Execute Jupyter Notebook
+        run: |
+          # Execute the notebook. --inplace ensures the output is saved back into the notebook.
+          jupyter nbconvert --to notebook --execute Gradio_inference.ipynb --output Gradio_inference_executed.ipynb
+
+      - name: Convert Notebook to HTML
+        run: |
+          jupyter nbconvert --to html Gradio_inference_executed.ipynb --output index.html
+
+      - name: Deploy to gh-pages
+        if: ${{ success() }}
+        run: |
+          # Configure Git
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Switch to gh-pages branch
+          git checkout gh-pages || git checkout --orphan gh-pages
+          
+          # Remove all existing files on gh-pages
+          rm -rf *
+          
+          # Move the newly generated index.html into this branch
+          mv ../index.html index.html
+          
+          # Add, commit, and push changes
+          git add index.html
+          git commit -m "Deploy updated interface [skip ci]"
+          git push origin gh-pages --force
