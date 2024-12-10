@@ -20,11 +20,23 @@ This project fine-tunes the `unsloth/llama-3.2-3b-instruct-bnb-4bit` base model 
 
 ## **How to Use**
 
-### **1. Try It Online (Gradio)**
+### **1. Run the Inference Notebook (Google Colab)**
 
-Interact with the model in your browser. The model will generate questions about a certain domain of interest. You, as the user, can then provide your own answers to those questions.
+To interact with the model, follow these steps:
 
-👉 **[Test the Model Here](https://9b7c23980211fb75b3.gradio.live/)**
+1. **Open the Notebook:**
+   Click the link below to open the `Gradio_inference.ipynb` notebook in Google Colab:
+   👉 **[Run the Inference Notebook](https://colab.research.google.com/github/<your-username>/Fine-Tuned-LLM/blob/main/Gradio_inference.ipynb)**
+
+2. **Set Up the Environment:**
+   - Ensure you are signed into your Google account.
+   - Click on `Runtime` > `Run all` to execute all cells in the notebook.
+   - Follow any prompts to authorize access if necessary.
+
+3. **Launch the Interface:**
+   - After running the notebook, a Gradio interface will appear.
+   - Use the interface to generate questions on your chosen topic and provide your own answers.
+
 
 ### **2. Integrate into Your Code**
 
