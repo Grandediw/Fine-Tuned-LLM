@@ -65,7 +65,7 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ## **How It Works**
 
 1. **Base Model**: 
-   We start with `unsloth/llama-3.2-3b-instruct-bnb-4bit`, a capable language model optimized for instruction-like tasks.
+   We start with `unsloth/Llama-3.2-1B-Instruct`, a capable language model optimized for instruction-like tasks.
 
 2. **LoRA Fine-Tuning**: 
    We apply LoRA adapters to select projection layers (`down_proj`, `gate_proj`, `k_proj`, `o_proj`, `q_proj`, `v_proj`, `up_proj`) so that the model can be efficiently specialized to generate questions about a given topic, rather than general text generation or answer completion.
@@ -78,7 +78,7 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ## **Model Details**
 
 ### **Base Model**
-- **Name**: `unsloth/llama-3.2-3b-instruct-bnb-4bit`
+- **Name**: `unsloth/Llama-3.2-1B-Instruct`
 - **Task Type**: Causal Language Modeling (CAUSAL_LM)
 - **Quantization**: 4-bit for efficient inference.
 
