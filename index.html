@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LoRA Fine-Tuned Model Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+      background: #f8f8f8;
+    }
+    h1 {
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 1em;
+      padding: 1em;
+      font-size: 1em;
+    }
+    button {
+      display: block;
+      margin: 0 auto;
+      padding: 0.5em 1.5em;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .response {
+      margin-top: 2em;
+      background: #fff;
+      padding: 1em;
+      border-radius: 5px;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Interact with the Fine-Tuned Model</h1>
+  <div class="container">
+    <textarea id="prompt" placeholder="Type your prompt here..."></textarea>
+    <button id="submitBtn">Submit</button>
+    <div class="response" id="response"></div>
+  </div>
+
+  <script>
+    const submitBtn = document.getElementById('submitBtn');
+    const responseDiv = document.getElementById('response');
+    const promptInput = document.getElementById('prompt');
+
+    // Replace the following placeholders with your actual values:
+    const HF_API_TOKEN = "YOUR_HUGGINGFACE_API_TOKEN";
+    const MODEL_NAME = "Grandediw/lora_model"; // The model endpoint on Hugging Face
+
+    submitBtn.addEventListener('click', async () => {
+      const prompt = promptInput.value.trim();
+      if (!prompt) return;
+      responseDiv.textContent = "Generating response...";
+
+      try {
+        const res = await fetch(`https://api-inference.huggingface.co/models/${MODEL_NAME}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${HF_API_TOKEN}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            inputs: prompt,
+            parameters: { max_new_tokens: 128, temperature: 1.5 }
+          })
+        });
+
+        const json = await res.json();
+        if (json.error) {
+          responseDiv.textContent = "Error: " + json.error;
+        } else if (Array.isArray(json) && json.length > 0 && json[0].generated_text) {
+          responseDiv.textContent = json[0].generated_text.trim();
+        } else {
+          responseDiv.textContent = "No response generated.";
+        }
+      } catch (err) {
+        responseDiv.textContent = "An error occurred: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
